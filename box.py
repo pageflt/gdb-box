@@ -108,7 +108,7 @@ native endianess of your architecture."""
 
 
     def convert_data(self, endianess, data):
-            try:
+        try:
             if endianess != self._endian:
                 buf = ""
                 for line in data.split("\n"):
@@ -122,8 +122,8 @@ native endianess of your architecture."""
                     buf = "%s\n" % buf.strip()
                 return buf
             return data
-            except Exception as ex:
-                raise Exception("Could not convert data. %s" % ex)
+        except Exception as ex:
+            raise Exception("Could not convert data. %s" % ex)
 
 
     def _reverse(self, data):
