@@ -15,7 +15,7 @@ The specified number of objects of the specified size are printed in
 hexadecimal, according to the specified byte order.
 
 Default count is 1. Default size is w (word). Default endianess is the
-native endianess of your architecture."""
+native endianess of your architecture.
 
 For example, to examine 64 bytes (16 words) starting from address `0xffffe4003de5f800` in Big Endian format, the invocation is as follows:
 ```
