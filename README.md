@@ -6,10 +6,10 @@ GDB extension for displaying memory contents in different byte orders.
 `box/FMT ADDRESS`
 
 Arguments:
-   - FMT is a repeat count followed by a size letter and a endianess letter.
+   - `FMT` is a repeat count followed by a size letter and a endianess letter.
        - Size letters: b(byte), h(halfword), w(word), g(giant, 8 bytes)
        - Endianess letters: L(little endian), B(big endian)
-   - ADDRESS is an expression for the memory address to examine
+   - `ADDRESS` is an expression for the memory address to examine
 
 The specified number of objects of the specified size are printed in
 hexadecimal, according to the specified byte order.
