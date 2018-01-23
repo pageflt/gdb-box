@@ -17,9 +17,9 @@ hexadecimal, according to the specified byte order.
 Default count is 1. Default size is w (word). Default endianess is the
 native endianess of your architecture.
 
-For example, to examine 64 bytes (16 words) starting from address `0xffffe4003de5f800` in Big Endian format, the invocation is as follows:
+For example, to examine 64 bytes (16 words) at the address pointed by `m->m_hdr->mh_data` in Big Endian format, the invocation is as follows:
 ```
-(gdb) box/16wB 0xffffe4003de5f800
+(gdb) box/16wB m->m_hdr->mh_data
 0xffffe4003de5f800:	0x52540012	0x34568a20	0x02ac61f0	0x08004500
 0xffffe4003de5f810:	0x0054f3ba	0x40004001	0xc18ec0a8	0x0202c0a8
 0xffffe4003de5f820:	0x020d0800	0x1b287f6e	0x00011451	0x675a0000
@@ -28,7 +28,7 @@ For example, to examine 64 bytes (16 words) starting from address `0xffffe4003de
 
 Same region and size, in Little Endian format:
 ```
-(gdb) box/16wL 0xffffe4003de5f800
+(gdb) box/16wL m->m_hdr->mh_data
 0xffffe4003de5f800:	0x12005452	0x208a5634	0xf061ac02	0x00450008
 0xffffe4003de5f810:	0xbaf35400	0x01400040	0xa8c08ec1	0xa8c00202
 0xffffe4003de5f820:	0x00080d02	0x6e7f281b	0x51140100	0x00005a67
@@ -37,12 +37,14 @@ Same region and size, in Little Endian format:
 
 Again, same memory region, but displayed as half-words in Little Endian format:
 ```
-(gdb) box/32hL 0xffffe4003de5f800
+(gdb) box/32hL m->m_hdr->mh_data
 0xffffe4003de5f800:	0x5452	0x1200	0x5634	0x208a	0xac02	0xf061	0x0008	0x0045
 0xffffe4003de5f810:	0x5400	0xbaf3	0x0040	0x0140	0x8ec1	0xa8c0	0x0202	0xa8c0
 0xffffe4003de5f820:	0x0d02	0x0008	0x281b	0x6e7f	0x0100	0x5114	0x5a67	0x0000
 0xffffe4003de5f830:	0x0000	0xea1a	0x0008	0x0000	0x0000	0x1110	0x1312	0x1514
 ```
+
+The main reason I wrote this is because you cannot resolve symbols when switching to different endianess with `set endian` command.
 
 ## Installation
 
