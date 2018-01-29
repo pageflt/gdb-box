@@ -72,11 +72,14 @@ native endianess of your architecture."""
         # - endian: byte order in which to display (little/big)
         args = args.split()
 
-        if len(args) == 1 and not args[0].startswith("/"):
-            addr_expr = args[0]
+        if not len(args):
+            raise Exception("Invalid arguments. Check `help box`.")
+
+        if not args[0].startswith("/"):
+            addr_expr = " ".join(args)
             return (1, 'w', self._endian), addr_expr
-        elif len(args) == 2:
-            addr_expr = args[1]
+        else:
+            addr_expr = " ".join(args[1:])
             r = re.match(r"\/(\d*)([LB|bhwg])([LB|bhwg]?)", args[0])
             if r:
                 count = 1 if r.group(1) == "" else int(r.group(1))
@@ -94,9 +97,7 @@ native endianess of your architecture."""
 
                 return (count, size, endian), addr_expr
             else:
-                raise Exception("Invalid format argument")
-        else:
-            raise Exception("Invalid arguments")
+                raise Exception("Invalid FMT argument. Check `help box`.")
 
 
     def get_data(self, fmt, addr_expr):
